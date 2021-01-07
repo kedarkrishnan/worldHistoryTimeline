@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      World History Timeline
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,45 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>World History Timeline</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container">
+      <div class="heading">
+        <div class="years">Year
+        </div>
+        <div *ngFor="let continent of continents | keyvalue" class="continent">
+          {{continent.value}}
+        </div>
+      </div>
+      <div class="content">
+          <div *ngFor="let year of years" class="year-row" [ngClass]="{'decade': isDecade(year)}">
+            <div class="year">
+              {{ year}}
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.Africa)"></app-event>
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.Antarctica)"></app-event>
+            </div>
+            <div class="events" >
+              <app-event [events]="getEvent( year, continents.Asia)"></app-event>
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.Europe)"></app-event>
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.NAmerica)"></app-event>
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.Oceania)"></app-event>
+            </div>
+            <div class="events">
+              <app-event [events]="getEvent( year, continents.SAmerica)"></app-event>
+            </div>
+          </div>
+      </div>
   </div>
 </ion-content>
