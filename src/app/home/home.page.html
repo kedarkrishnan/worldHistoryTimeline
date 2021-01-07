@@ -3,6 +3,11 @@
     <ion-title>
       World History Timeline
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addEvent()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,36 +20,35 @@
 
   <div class="container">
       <div class="heading">
-        <div class="years">Year
-        </div>
-        <div *ngFor="let continent of continents | keyvalue" class="continent">
+        <div class="years col-text">Year</div>
+        <div *ngFor="let continent of continents | keyvalue" class="continent col-text">
           {{continent.value}}
         </div>
       </div>
       <div class="content">
           <div *ngFor="let year of years" class="year-row" [ngClass]="{'decade': isDecade(year)}">
-            <div class="year">
+            <div class="year col-text">
               {{ year}}
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.Africa)"></app-event>
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.Antarctica)"></app-event>
             </div>
-            <div class="events" >
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.Asia)"></app-event>
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.Europe)"></app-event>
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.NAmerica)"></app-event>
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.Oceania)"></app-event>
             </div>
-            <div class="events">
+            <div class="events-container">
               <app-event [events]="getEvent( year, continents.SAmerica)"></app-event>
             </div>
           </div>

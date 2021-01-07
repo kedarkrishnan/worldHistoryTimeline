@@ -54,4 +54,8 @@ export class HomePage {
     isDecade(year: number) {
         return year % 100 === 0;
     }
+
+    addEvent() {
+
+    }
 }

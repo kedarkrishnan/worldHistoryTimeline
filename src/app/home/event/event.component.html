@@ -1,7 +1,7 @@
 <div class="event-wrapper">
   <div class="periods">
     <div class="period" [class]="{'period-end-line': isPeriodEnd(period)}"
-         *ngFor="let period of timeLinePeriods">
+         *ngFor="let period of timeLinePeriods" (click)="presentPopover($event, period)">
       <div class="period-line"  *ngIf="!isPeriodStart(period)" [ngStyle]="{'background-color': period.periodColor}"></div>
       <div class="period-start-line" *ngIf="isPeriodStart(period)" [ngStyle]="{'background-color': period.periodColor}">
         <div class="period-start" [ngStyle]="{'background-color': period.periodColor}"></div>
@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="events">
-    <div class="event" *ngFor="let event of timeLineEvents" (mouseover)="presentPopover($event, event)" >
+    <div class="event" *ngFor="let event of timeLineEvents" (click)="presentPopover($event, event)">
       <ion-icon *ngIf="!event.periodPart" class="event-icon" [src]="'/assets/icon/' + event.type?.toLowerCase() + '.svg'"></ion-icon>
       <div *ngIf="!event.periodPart">{{event.event}}</div>
     </div>
