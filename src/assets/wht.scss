@@ -1,3 +1,23 @@
-.event-popover{
-  --background: var(--ion-color-step-100)
+body{
+  --ion-color-primary:#d20000;
 }
+.clickable{
+  cursor: pointer;
+}
+.event-popover{
+  --background: var(--ion-color-step-100);
+  --ion-toolbar-background: var(--ion-color-step-100);
+}
+
+.event-modal{
+  --background: var(--ion-color-step-100);
+  --ion-toolbar-background: var(--ion-color-step-100);
+  --ion-item-background: var(--ion-color-step-100);
+  --ion-item-border-color: var(--ion-color-step-300);
+  --height:600px;
+
+  .ion-page{
+    justify-content: start;
+  }
+}
+

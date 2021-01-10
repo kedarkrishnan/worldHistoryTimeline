@@ -1,0 +1,54 @@
+<div class="modal-header">
+    {{getTitle()}} Event
+</div>
+<div class="modal-content">
+  <form [formGroup]="eventForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Event</ion-label>
+        <ion-input formControlName="event"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Event Type</ion-label>
+        <ion-input formControlName="type"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Short Description</ion-label>
+        <ion-input formControlName="summary"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Continent</ion-label>
+        <ion-input formControlName="continent"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Country</ion-label>
+        <ion-input formControlName="country"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Date (DD MMM YYYY or YYYY)</ion-label>
+        <ion-input formControlName="eventDate"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">End Date (DD MMM YYYY or YYYY)</ion-label>
+        <ion-input formControlName="eventEndDate"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Color</ion-label>
+        <ion-input formControlName="periodColor"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">
+        Cancel
+      </ion-button>
+      <ion-button color="danger" (click)="delete()">
+        Delete
+      </ion-button>
+      <ion-button color="primary" (click)="save()">
+        {{getButtonName()}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</div>

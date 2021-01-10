@@ -1,5 +1,10 @@
 <div class="event-popover-container" (click)="dismissPopover()">
+    <div class="event-popover-ribbon">{{timeLineEvent.country}} {{timeLineEvent.continent}}</div>
     <div class="event-heading">{{timeLineEvent.event}}</div>
     <div class="event-year">{{getYearSummary()}}</div>
     <div class="event-summary">{{timeLineEvent.summary}}</div>
+
+    <div class="event-toolbar">
+        <ion-icon class="clickable" name="pencil-outline" (click)="addEditEvent()"></ion-icon>
+    </div>
 </div>

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NavParams, PopoverController} from '@ionic/angular';
+import {ModalController, NavParams, PopoverController} from '@ionic/angular';
 import {TimelineEvent} from '../../model/timeline-event';
+import {EventService} from '../../service/event.service';
+import {AddEditEventComponent} from '../add-edit-event/add-edit-event.component';
 
 @Component({
   selector: 'app-event-popover',
@@ -12,7 +14,10 @@ export class EventPopoverComponent implements OnInit {
 
 
 
-  constructor(private navParams: NavParams, private popoverController: PopoverController) {
+  constructor(private navParams: NavParams,
+              private eventService: EventService,
+              private modalController: ModalController,
+              private popoverController: PopoverController) {
     this.timeLineEvent = navParams.data.timeLineEvent;
   }
 
@@ -21,11 +26,22 @@ export class EventPopoverComponent implements OnInit {
   getYearSummary() {
     const endDate = this.timeLineEvent.endDate ? this.timeLineEvent.endDate + ' ' + this.timeLineEvent.endYear : this.timeLineEvent.endYear;
     let yearSummary = this.timeLineEvent.date ? this.timeLineEvent.date + ' ' + this.timeLineEvent.year : this.timeLineEvent.year;
-    yearSummary = endDate ? yearSummary + ' - ' + endDate + ' (' +  (this.timeLineEvent.endYear - this.timeLineEvent.year) + ' years)' : yearSummary;
+    yearSummary = endDate ? yearSummary + ' - ' + endDate : yearSummary;
+    const totYears = this.timeLineEvent.endYear - this.timeLineEvent.year;
+    yearSummary = totYears > 0 ? yearSummary + ' (' +  totYears + ' years)' : yearSummary;
     return yearSummary;
   }
 
   dismissPopover() {
     this.popoverController.dismiss().then();
+  }
+
+  async addEditEvent() {
+    const modal = await this.modalController.create({
+      component: AddEditEventComponent,
+      componentProps: {timeLineEvent: this.timeLineEvent},
+      cssClass: 'event-modal'
+    });
+    modal.present().then();
   }
 }

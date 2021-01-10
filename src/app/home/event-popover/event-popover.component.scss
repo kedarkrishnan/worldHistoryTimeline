@@ -1,5 +1,11 @@
 .event-popover-container{
-  padding: 20px;
+  padding: 10px;
+}
+.event-popover-ribbon{
+  margin: -10px -10px 10px;
+  font-size: 0.8rem;
+  background: var(--ion-color-primary);
+  padding: 3px;
 }
 .event-heading{
   font-size: 0.9rem;
@@ -14,4 +20,9 @@
 .event-summary{
   font-size: 0.8rem;
   font-weight: 400;
+}
+.event-toolbar{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -1,6 +1,7 @@
 import {Continent} from './continent.enum';
 
 export class TimelineEvent {
+    id: number;
     year: number;
     endYear: number;
     date: string;

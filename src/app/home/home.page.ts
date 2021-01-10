@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {TimelineEvent} from '../model/timeline-event';
 import {Continent} from '../model/continent.enum';
+import {ModalController} from '@ionic/angular';
+import {AddEditEventComponent} from './add-edit-event/add-edit-event.component';
+import {EventService} from '../service/event.service';
 
 
 @Component({
@@ -14,38 +16,15 @@ export class HomePage {
   years: number[];
   events: Map<string, TimelineEvent[]> = new Map<string, TimelineEvent[]>();
 
-  constructor(private http: HttpClient) {
+  constructor(private eventService: EventService,
+              private modalController: ModalController) {
       const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
-      this.years = range( 1200, 2021, 1);
+      this.years = range( 1200, new Date().getFullYear(), 1);
       this.years.reverse();
-
-      this.http.get<TimelineEvent[]>('assets/db/timeline.json').subscribe(data => {
-          data.forEach(event => {
-              const key = event.continent + event.year;
-              const events = this.events.get(key) || [];
-              events.push(event);
-              this.events.set(key, events);
-              if ( event.endYear){
-                  this.setTimelinePeriod(event);
-              }
-          });
-          console.log(this.events);
+      this.eventService.getEvents().subscribe(response => {
+          this.events = response;
       });
   }
-
-    private setTimelinePeriod(event: TimelineEvent) {
-      let year = event.year;
-      while ( year <= event.endYear){
-          event = JSON.parse(JSON.stringify(event));
-          event.periodPart = true;
-          event.periodYear = year;
-          const key = event.continent + year;
-          const events = this.events.get(key) || [];
-          events.push(event);
-          this.events.set(key, events);
-          year = year + 1;
-      }
-    }
 
     getEvent(year: number, continent: Continent): TimelineEvent[] {
         return this.events.get(continent + year);
@@ -55,7 +34,11 @@ export class HomePage {
         return year % 100 === 0;
     }
 
-    addEvent() {
-
+    async addEditEvent() {
+        const modal = await this.modalController.create({
+            component: AddEditEventComponent,
+            cssClass: 'event-modal'
+        });
+        modal.present().then();
     }
 }
